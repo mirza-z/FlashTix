@@ -87,4 +87,27 @@ public class ReservationTests
 
         Assert.Throws<InvalidOperationException>(() => reservation.Cancel());
     }
+
+    [Fact]
+    public void Refund_WhenConfirmed_TransitionsToRefunded()
+    {
+        var reservation = Reservation.CreateHeld(
+            Guid.NewGuid(), Guid.NewGuid(), 2, "key-6",
+            TimeSpan.FromMinutes(10), DateTimeOffset.UtcNow);
+        reservation.Confirm(); 
+
+        reservation.Refund();
+
+        Assert.Equal(ReservationStatus.Refunded, reservation.Status);
+    }
+
+    [Fact]
+    public void Refund_WhenHeld_Throws()
+    {
+        var reservation = Reservation.CreateHeld(
+            Guid.NewGuid(), Guid.NewGuid(), 2, "key-7",
+            TimeSpan.FromMinutes(10), DateTimeOffset.UtcNow);
+
+        Assert.Throws<InvalidOperationException>(() => reservation.Refund());
+    }
 }
