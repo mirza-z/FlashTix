@@ -1,5 +1,4 @@
 ﻿using FlashTix.Domain.Reservations;
-using Xunit;
 
 namespace FlashTix.Domain.UnitTests.Reservations;
 
@@ -43,5 +42,27 @@ public class ReservationTests
         reservation.Confirm(); 
 
         Assert.Throws<InvalidOperationException>(() => reservation.Confirm());
+    }
+
+    [Fact]
+    public void Expire_WhenHeld_TransitionsToExpired()
+    {
+        var reservation = Reservation.CreateHeld(
+          Guid.NewGuid(), Guid.NewGuid(), 2, "key-2",
+          TimeSpan.FromMinutes(10), DateTimeOffset.UtcNow);
+        reservation.Expire();
+
+        Assert.Equal(ReservationStatus.Expired, reservation.Status);
+    }
+
+    [Fact]
+    public void Expire_WhenAlreadyConfirmed_Throws()
+    {
+        var reservation = Reservation.CreateHeld(
+            Guid.NewGuid(), Guid.NewGuid(), 2, "key-3",
+            TimeSpan.FromMinutes(10), DateTimeOffset.UtcNow);
+        reservation.Confirm();
+
+        Assert.Throws<InvalidOperationException>(() => reservation.Expire());
     }
 }

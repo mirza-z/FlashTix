@@ -1,6 +1,7 @@
 <Solution>
   <Project Path="FlashTix.Api/FlashTix.Api.csproj" />
-  <Project Path="FlashTix.Aplication/FlashTix.Application.csproj" />
+  <Project Path="FlashTix.Application/FlashTix.Application.csproj" />
+  <Project Path="FlashTix.Domain.UnitTests/FlashTix.Domain.UnitTests.csproj" Id="8b91edee-737b-44ee-ab93-4fd21f1218ef" />
   <Project Path="FlashTix.Domain/FlashTix.Domain.csproj" />
   <Project Path="FlashTix.Infrastructure/FlashTix.Infrastructure.csproj" />
 </Solution>

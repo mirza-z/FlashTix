@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FlashTix.Aplication\FlashTix.Application.csproj" />
+    <ProjectReference Include="..\FlashTix.Application\FlashTix.Application.csproj" />
   </ItemGroup>
 
 </Project>

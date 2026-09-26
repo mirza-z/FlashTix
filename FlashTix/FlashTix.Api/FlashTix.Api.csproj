@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FlashTix.Aplication\FlashTix.Application.csproj" />
+    <ProjectReference Include="..\FlashTix.Application\FlashTix.Application.csproj" />
     <ProjectReference Include="..\FlashTix.Infrastructure\FlashTix.Infrastructure.csproj" />
   </ItemGroup>
 
