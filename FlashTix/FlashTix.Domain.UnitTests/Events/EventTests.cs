@@ -44,4 +44,24 @@ public class EventTests
 
         Assert.Throws<InvalidOperationException>(() => ev.Cancel());
     }
+
+    [Fact]
+    public void UpdateCapacity_WhenNewCapacityAboveSoldPlusHeld_UpdatesCapacity()
+    {
+        var ev = Event.Create("Concert", "Venue", DateTimeOffset.UtcNow.AddDays(30),
+            5000, 100, DateTimeOffset.UtcNow, null);
+
+        ev.UpdateCapacity(newCapacity: 150, currentSoldPlusHeld: 80);
+
+        Assert.Equal(150, ev.Capacity);
+    }
+
+    [Fact]
+    public void UpdateCapacity_WhenNewCapacityBelowSoldPlusHeld_Throws()
+    {
+        var ev = Event.Create("Concert", "Venue", DateTimeOffset.UtcNow.AddDays(30),
+            5000, 100, DateTimeOffset.UtcNow, null);
+ 
+        Assert.Throws<InvalidOperationException>(() => ev.UpdateCapacity(newCapacity: 50, currentSoldPlusHeld: 80));
+    }
 }
