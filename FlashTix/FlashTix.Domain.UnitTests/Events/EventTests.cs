@@ -24,4 +24,24 @@ public class EventTests
  
         Assert.Throws<InvalidOperationException>(() => ev.Publish());
     }
+
+    [Fact]
+    public void Cancel_WhenDraft_TransitionsToCancelled()
+    {
+        var ev = Event.Create("Concert", "Venue", DateTimeOffset.UtcNow.AddDays(30),
+             5000, 100, DateTimeOffset.UtcNow, null);
+        ev.Cancel();
+
+        Assert.Equal(EventStatus.Cancelled, ev.Status);
+    }
+
+    [Fact]
+    public void Cancel_WhenAlreadyCancelled_Throws()
+    {
+        var ev = Event.Create("Concert", "Venue", DateTimeOffset.UtcNow.AddDays(30),
+           5000, 100, DateTimeOffset.UtcNow, null);
+        ev.Cancel();
+
+        Assert.Throws<InvalidOperationException>(() => ev.Cancel());
+    }
 }
