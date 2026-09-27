@@ -4,12 +4,13 @@ public class Inventory
 {
     public Guid EventId { get; private set; }
     public int Available { get; private set; }
-    public int Version { get; private set; } 
+    public int Capacity { get; private set; }
+    public int Version { get; private set; }
 
-    private Inventory() { } 
+    private Inventory() { }
 
     public static Inventory Create(Guid eventId, int capacity)
-        => new() { EventId = eventId, Available = capacity, Version = 0 };
+        => new() { EventId = eventId, Available = capacity, Capacity = capacity, Version = 0 };
 
     public void Reserve(int quantity)
     {
@@ -26,6 +27,8 @@ public class Inventory
     {
         if (quantity <= 0)
             throw new ArgumentException("Quantity must be positive.", nameof(quantity));
+        if (Available + quantity > Capacity)
+            throw new InvalidOperationException("Release would exceed capacity.");
 
         Available += quantity;
         Version++;
