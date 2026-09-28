@@ -15,4 +15,7 @@ public static class ReservationErrors
 
     public static readonly Error PurchaseLimitExceeded =
         Error.Validation("Reservation.PurchaseLimitExceeded", "Purchase limit per user exceeded.");
+
+    public static readonly Error InvalidQuantity =
+    Error.Validation("Reservation.InvalidQuantity", "Quantity must be greater than zero.");
 }
