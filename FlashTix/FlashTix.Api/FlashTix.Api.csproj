@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.12" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="5.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" />
   </ItemGroup>
 
@@ -19,5 +20,16 @@
   <ItemGroup>
     <Folder Include="Controllers\" />
   </ItemGroup>
+
+<ItemGroup>
+  <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.12" />
+  <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="5.0.0" />
+  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.12">
+    <PrivateAssets>all</PrivateAssets>
+    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+  </PackageReference>
+  <PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" />
+</ItemGroup>
+
 
 </Project>
