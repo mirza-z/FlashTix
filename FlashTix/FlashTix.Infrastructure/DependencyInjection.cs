@@ -1,4 +1,5 @@
-﻿using FlashTix.Infrastructure.Persistence;
+﻿using FlashTix.Application.Abstractions.Persistence;
+using FlashTix.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +15,13 @@ public static class DependencyInjection
             options
                 .UseNpgsql(configuration.GetConnectionString("Postgres"))
                 .UseSnakeCaseNamingConvention());
+
+        services.AddSingleton(TimeProvider.System);
+
+        services.AddScoped<IEventRepository, EventRepository>();
+        services.AddScoped<IInventoryRepository, InventoryRepository>();
+        services.AddScoped<IReservationRepository, ReservationRepository>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         return services;
     }
